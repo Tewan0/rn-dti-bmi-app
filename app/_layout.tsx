@@ -1,24 +1,54 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { Prompt_400Regular, Prompt_700Bold, useFonts } from "@expo-google-fonts/prompt";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const [fontsLoaded] = useFonts({
+    Prompt_400Regular,
+    Prompt_700Bold,
+  });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack>
+      <Stack.Screen
+        name="index"
+        options={{
+          headerTitle: "Home",
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: '#ffffff',
+          },
+          headerTitleStyle: {
+            fontFamily: "Prompt_700Bold",
+            color: '#2d98e4',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="bmi"
+        options={{
+          headerTitle: "BMI Calculator",
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: '#ffffff',
+          },
+          headerTitleStyle: {
+            fontFamily: "Prompt_700Bold",
+            color: '#2d98e4',
+          },
+        }}
+      />
+    </Stack>
   );
 }
