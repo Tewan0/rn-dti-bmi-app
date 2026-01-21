@@ -1,4 +1,4 @@
-![rn_bmi](https://github.com/user-attachments/assets/1137fb13-859e-474c-ac95-7987c0affba7)# Mobile Application by React Native with Expo 👋
+# Mobile Application by React Native with Expo 👋
 
 ## BMI Calucator
 
